@@ -1,8 +1,75 @@
-<div class="card" style="width: 18rem;">
-  <img src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/f88c38f6-5eb3-4cd8-a509-08b59410875b/tee-shirt-sportswear-club-pour-bVD3j8.png" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+<div class="row">
+  <div>
+    {{ list.length > 3 ? "hello" : "bye" }}
+  </div>
+  <div class="col-md-3" *ngFor="let item of list">
+    <div class="card" style="width: 18rem">
+      <img
+        [ngStyle]="{ height: '300px', width: '300px', objectFit: 'cover' }"
+        src="{{ item.picture }}"
+        alt=""
+        class="card-img-top"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ item.title }}</h5>
+        <p class="card-text">
+          {{ item.description }}
+        </p>
+        <p class="card-text">
+          {{
+            item.quantity === 0
+              ? "Out of Stock"
+              : "Left Items : " + item.quantity
+          }}
+        </p>
+
+        <div class="row">
+          <span
+            [ngStyle]="{
+              margin: '2px',
+              display: 'block',
+              width: '20px',
+              height: '20px',
+              cursor: 'pointer',
+              backgroundColor: '#449c90'
+            }"
+          ></span
+          ><span
+            [ngStyle]="{
+              margin: '2px',
+              display: 'block',
+              width: '20px',
+              height: '20px',
+              cursor: 'pointer',
+              backgroundColor: 'black'
+            }"
+          ></span
+          ><span
+            [ngStyle]="{
+              margin: '2px',
+              display: 'block',
+              width: '20px',
+              height: '20px',
+              cursor: 'pointer',
+              border: '1px black solid',
+              backgroundColor: 'white'
+            }"
+          ></span>
+        </div>
+
+        <p class="card-text">Price : {{ item.price }}</p>
+        <button class="btn btn-sm btn-primary" (click)="incrementLike(item)">
+          Like {{ item.nbrLikes }}
+        </button>
+        <button
+          [ngStyle]="{ float: 'right' }"
+          class="btn btn-sm btn-warning"
+          (click)="buyProduct(item)"
+          [disabled]="item.quantity === 0"
+        >
+          Buy
+        </button>
+      </div>
+    </div>
   </div>
 </div>
