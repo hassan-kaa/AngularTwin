@@ -1,9 +1,21 @@
+<form class="col-md-6">
+  <input
+    name="price"
+    type="number"
+    class="form-control"
+    placeholder="Search by price"
+    [(ngModel)]="priceMax"
+  />
+</form>
+{{ priceMax }}
+<br />
 <div class="row">
-  <div>
-    {{ list.length > 3 ? "hello" : "bye" }}
-  </div>
   <div class="col-md-3" *ngFor="let item of list">
-    <div class="card" style="width: 18rem">
+    <div
+      class="card"
+      style="width: 18rem"
+      *ngIf="item.price <= priceMax || priceMax == null"
+    >
       <img
         [ngStyle]="{ height: '300px', width: '300px', objectFit: 'cover' }"
         src="{{ item.picture }}"
